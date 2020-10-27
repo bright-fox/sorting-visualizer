@@ -1,0 +1,59 @@
+.navbar {
+    background-color: #303030;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-around;
+}
+
+.navbrand {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.slider-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider-name {
+    font-size: 0.8rem;    
+    margin-bottom: 5px;
+}
+
+.slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-label {
+    margin: 0 3px;
+    font-size: 0.9rem;
+}
+
+.slider input {
+    height: 2px;
+}
+
+.left-menu, .right-menu {
+    display: flex;
+    align-items: center;
+}
+
+.left-menu > *, .right-menu > * {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+    padding: 5px;
+}
