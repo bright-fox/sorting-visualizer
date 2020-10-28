@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { SIZE } from '../actions'
+import OptionsContext from '../contexts/OptionsContext'
 import "./Navbar.css"
 
 const Navbar = () => {
-    const [arraySize, setArraySize] = useState(10)
+    const { state, dispatch } = useContext(OptionsContext)
     const [speed, setSpeed] = useState(0.5)
 
     return (
@@ -13,7 +15,7 @@ const Navbar = () => {
                     <div className="slider-name">Size</div>
                     <div className="slider">
                         <div className="slider-label">Small</div>
-                        <input type="range" min="3" max="20" value={arraySize} onChange={e => setArraySize(e.target.value)} />
+                        <input type="range" min="3" max="20" value={state.size} onChange={e => dispatch({ type: SIZE, payload: Number(e.target.value) })} />
                         <div className="slider-label">Big</div>
                     </div>
                 </div>
