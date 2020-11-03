@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { SIZE } from '../actions'
+import { SIZE, SORT } from '../actions'
 import OptionsContext from '../contexts/OptionsContext'
+import { BUBBLESORT } from '../variables'
 import "./Navbar.css"
 
 const Navbar = () => {
@@ -15,7 +16,7 @@ const Navbar = () => {
                     <div className="slider-name">Size</div>
                     <div className="slider">
                         <div className="slider-label">Small</div>
-                        <input type="range" min="3" max="20" value={state.size} onChange={e => dispatch({ type: SIZE, payload: Number(e.target.value) })} />
+                        <input type="range" min="3" max="100" value={state.size} onChange={e => dispatch({ type: SIZE, payload: Number(e.target.value) })} />
                         <div className="slider-label">Big</div>
                     </div>
                 </div>
@@ -30,7 +31,7 @@ const Navbar = () => {
             </div>
 
             <div className="right-menu">
-                <div className="pointer">Bubble Sort</div>
+                <div className="pointer" onClick={() => dispatch({ type: SORT, payload: BUBBLESORT })}>Bubble Sort</div>
                 <div className="pointer">Quick Sort</div>
                 <div className="pointer">Selection Sort</div>
                 <div className="pointer">Insertion Sort</div>
