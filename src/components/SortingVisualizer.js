@@ -1,22 +1,24 @@
 import React, { useContext, useEffect, useState } from "react"
-import { SORT } from "../actions"
+import { SORT, STOP } from "../actions"
 import bubblesort from "../algorithms/bubblesort"
 import OptionsContext from "../contexts/OptionsContext"
+import { shuffleArray, sleep, changeBarColors, calculateHeight } from "../utils"
+import { COMPARE_COLOR, NORMAL_COLOR, SWAP_COLOR } from "../variables"
+import Controls from "./Controls"
+
 import "./SortingVisualizer.css"
-import { shuffleArray, sleep, changeBarColors } from "../utils"
 
 const SortingVisualizer = () => {
     const { state, dispatch } = useContext(OptionsContext)
     const [array, setArray] = useState([])
     const [animations, setAnimations] = useState([])
-    const [start, setStart] = useState(false)
     const [index, setIndex] = useState(0)
 
     // create shuffled array
     useEffect(() => {
         let randomNumbers = []
 
-        for (let i = 0; i < state.size; i++) {
+        for (let i = 1; i <= state.size; i++) {
             randomNumbers.push(i)
         }
 
@@ -34,9 +36,9 @@ const SortingVisualizer = () => {
     // start the sorting animation
     useEffect(() => {
         const colorBars = async () => {
-            if (!start) return
+            if (!state.start) return
             if (index >= animations.length - 1) {
-                setStart(false)
+                dispatch({ type: STOP })
                 return setIndex(0)
             }
 
@@ -45,19 +47,19 @@ const SortingVisualizer = () => {
             const displayedBars = document.querySelectorAll(".bar")
 
             // color change for displaying comparison between two values
-            changeBarColors(displayedBars, animation.comparison, "green")
+            changeBarColors(displayedBars, animation.comparison, COMPARE_COLOR)
             await sleep(200)
 
             if (!animation.swap) {
                 // change color back to the original color
-                changeBarColors(displayedBars, animation.comparison, "blue")
+                changeBarColors(displayedBars, animation.comparison, NORMAL_COLOR)
             } else {
                 // color change to indicate swap of two values
-                changeBarColors(displayedBars, animation.swap, "red")
+                changeBarColors(displayedBars, animation.swap, SWAP_COLOR)
                 await sleep(200)
 
                 // change color back to the original color
-                changeBarColors(displayedBars, animation.swap, "blue")
+                changeBarColors(displayedBars, animation.swap, NORMAL_COLOR)
 
                 // make the actual changes in the array
                 temp = array[animation.swap[0]]
@@ -69,20 +71,34 @@ const SortingVisualizer = () => {
             setIndex(prevIndex => prevIndex + 1)
         }
         colorBars()
-    }, [start, index, animations, array])
+    }, [state.start, index, animations, array, dispatch])
 
-    // Start button handler
-    const handleStart = () => {
-        if (state.sortAlgo === null) return
-        setStart(prevState => !prevState)
+    const renderBars = () => {
+        const width = (1 / array.length) * 100
+
+        return array.map(el => {
+            const height = calculateHeight(el, array.length - 1)
+            return <div key={el.toString()} className="bar" style={{ height: `${height}%`, width: `${width}%` }}>{array.length < 30 ? el : ""}</div>
+        })
     }
 
     return (
         <>
-            < div className="bar-container" >
-                {array.map(el => <div key={el.toString()} className="bar" style={{ height: (el * 10) + "px" }}>{el}</div>)}
+            <div className="legend-container">
+                <div className="color-container">
+                    <div className="color-box" style={{ backgroundColor: COMPARE_COLOR }} />
+                    <div>Comparison</div>
+                </div>
+
+                <div className="color-container">
+                    <div className="color-box" style={{ backgroundColor: SWAP_COLOR }} />
+                    <div>Swap</div>
+                </div>
             </div>
-            <button onClick={handleStart}>{start ? "Stop" : "Start"}</button>
+            < div className="bar-container" >
+                {renderBars()}
+            </div>
+            <Controls />
         </>
     )
 }

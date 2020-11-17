@@ -18,13 +18,22 @@ export function shuffleArray(a) {
 }
 
 /**
- * 
- * @param {*} bars Reference to the displayed HTML bars 
- * @param {*} indices indices of the bars
- * @param {*} backgroundColor 
+ * Changes the colors of the bars
+ * @param {Element} bars Reference to the displayed HTML bars 
+ * @param {Array} indices indices of the bars
+ * @param {String} backgroundColor 
  */
 export const changeBarColors = (bars, indices, backgroundColor) => {
     for(let i of indices) {
         bars[i].style.backgroundColor = backgroundColor
     }
+}
+
+/**
+ * Calculates the heights for the bars
+ * @param {Number} val 
+ * @param {Number} max 
+ */
+export const calculateHeight = (val, max) => {
+    return (val / (max + 1)) * 100
 }

@@ -1,13 +1,45 @@
+button:hover {
+    filter: brightness(80%)
+}
+
+.legend-container {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-container {
+    display: flex;
+    align-items: center;
+    margin: 2vw;
+}
+
+.color-box {
+    width: 35px;
+    height: 30px;
+    border-radius: 3px;
+    margin: 1vw;
+}
+
 .bar-container {
     display: flex;
     justify-content: center;
+    align-items: flex-end;
+    height: 500px;
+    background-color: #eee;
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px 20px;
 }
 
 .bar {
-    min-height: 10px;
-    width: 20px;
-    background-color: #348feb;
-    border: 1px solid darkblue;
-    margin-left: 0.5px;
-    margin-right: 0.5px;
+    max-width: 50px;
+    background-color: #3CAEA3;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
 }

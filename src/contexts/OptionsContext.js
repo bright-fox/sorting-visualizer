@@ -1,5 +1,5 @@
 import React from "react"
 
-const OptionsContext = React.createContext({size: 10, speed: 0.5})
+const OptionsContext = React.createContext(null)
 
 export default OptionsContext

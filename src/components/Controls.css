@@ -1,0 +1,24 @@
+.controls {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-button {
+    margin: 5px;
+    padding: 12px;
+    background-color: #173F5F;
+    color: #fff;
+    border: none;
+    border-radius: 100%;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.speed-control {
+    cursor: pointer;
+    color: darkgray;
+    font-size: 0.9rem;
+}
