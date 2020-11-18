@@ -1,12 +1,27 @@
 .dropdown-menu {
     position: relative;
-    cursor: pointer;
 }
 
 .dropdown-heading {
-    padding: 10px;
-    border: 1px solid white;
+    padding: 10px 20px;
     user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-heading > svg {
+    padding: 1px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.dropdown-label {
+    margin-right: 7px;
+}
+
+.dropdown-value {
+    border-bottom: 1px solid white;
 }
 
 .dropdown-options {

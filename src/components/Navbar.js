@@ -32,7 +32,7 @@ const Navbar = () => {
             </div>
 
             <Dropdown defaultValue="Select algorithm" value={state.sortAlgo} values={[BUBBLE_SORT, QUICK_SORT, SELECTION_SORT, INSERTION_SORT]} handleOptionSelection={handleAlgorithmDropdown}/>
-            <Dropdown value={state.size} values={[10, 25, 50]} handleOptionSelection={handleSizeDropdown} />
+            <Dropdown label="Size" value={state.size} values={[10, 25, 50]} handleOptionSelection={handleSizeDropdown} />
         </div>
     )
 }
