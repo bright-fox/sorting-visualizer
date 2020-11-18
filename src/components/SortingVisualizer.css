@@ -1,7 +1,3 @@
-button:hover {
-    filter: brightness(80%)
-}
-
 .legend-container {
     height: 50px;
     display: flex;

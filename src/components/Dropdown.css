@@ -33,8 +33,15 @@
 
 .dropdown-option {
     padding: 10px;
-    border: 1px solid white;
     overflow: hidden;
+}
+
+.dropdown-option:not(:last-child) {
+    border-bottom: 1px solid white;
+}
+
+.dropdown-option:hover {
+    filter: brightness(80%);
 }
 
 .border-none {
