@@ -1,0 +1,31 @@
+.dropdown-menu {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-heading {
+    padding: 10px;
+    border: 1px solid white;
+    user-select: none;
+}
+
+.dropdown-options {
+    position: absolute;
+    cursor: pointer;
+    background-color: #424242;
+    width: 100%;
+}
+
+.dropdown-option {
+    padding: 10px;
+    border: 1px solid white;
+    overflow: hidden;
+}
+
+.border-none {
+    border-bottom: 1px solid transparent;
+}
+
+.hidden {
+    display: none;
+}
