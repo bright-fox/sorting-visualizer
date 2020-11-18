@@ -31,9 +31,23 @@ export const changeBarColors = (bars, indices, backgroundColor) => {
 
 /**
  * Calculates the heights for the bars
- * @param {Number} val 
- * @param {Number} max 
+ * @param {Number} val Number
+ * @param {Number} max Maximum number
  */
 export const calculateHeight = (val, max) => {
     return (val / (max + 1)) * 100
+}
+
+/**
+ * Swap two values in an array based on two indices
+ * @param {Array} arr Array of numbers
+ * @param {Number} indexOne First index
+ * @param {Number} indexTwo Second index
+ */
+export const swap = (arr, indexOne, indexTwo) => {
+    let temp
+
+    temp = arr[indexOne]
+    arr[indexOne] = arr[indexTwo]
+    arr[indexTwo] = temp
 }

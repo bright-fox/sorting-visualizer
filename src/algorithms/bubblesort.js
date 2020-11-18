@@ -1,5 +1,6 @@
+import { swap } from "../utils"
+
 const bubblesort = arr => {
-    let temp
     let animations = []
 
     for(let n = arr.length; n > 1; n--) {
@@ -10,11 +11,8 @@ const bubblesort = arr => {
             animation.comparison = [i, i + 1]
 
             if(arr[i] > arr[i + 1]) {
-                temp = arr[i]
-                arr[i] = arr[i + 1]
-                arr[i + 1] = temp
-
                 // swap values of i and i + 1
+                swap(arr, i, i + 1)
                 animation.swap = [i, i + 1]
             }
 

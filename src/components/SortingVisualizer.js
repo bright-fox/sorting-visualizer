@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { SORT, STOP } from "../actions"
 import bubblesort from "../algorithms/bubblesort"
 import OptionsContext from "../contexts/OptionsContext"
-import { shuffleArray, sleep, changeBarColors, calculateHeight } from "../utils"
+import { shuffleArray, sleep, changeBarColors, calculateHeight, swap } from "../utils"
 import { COMPARE_COLOR, DEFAULT_SLEEP_DELAY, NORMAL_COLOR, SWAP_COLOR } from "../variables"
 import Controls from "./Controls"
 
@@ -23,7 +23,6 @@ const SortingVisualizer = () => {
         }
 
         shuffleArray(randomNumbers)
-        dispatch({ type: SORT, payload: null })
         setArray(randomNumbers)
     }, [state.size, dispatch])
 
@@ -39,10 +38,10 @@ const SortingVisualizer = () => {
             if (!state.start) return
             if (index >= animations.length - 1) {
                 dispatch({ type: STOP })
+                dispatch({ type: SORT, payload: null})
                 return setIndex(0)
             }
 
-            let temp
             const animation = animations[index]
             const displayedBars = document.querySelectorAll(".bar")
 
@@ -64,9 +63,7 @@ const SortingVisualizer = () => {
                 changeBarColors(displayedBars, animation.swap, NORMAL_COLOR)
 
                 // make the actual changes in the array
-                temp = array[animation.swap[0]]
-                array[animation.swap[0]] = array[animation.swap[1]]
-                array[animation.swap[1]] = temp
+                swap(array, animation.swap[0], animation.swap[1])
             }
 
             // increment the index of the animations array for the next animation
