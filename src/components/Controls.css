@@ -16,9 +16,3 @@
     outline: none;
     cursor: pointer;
 }
-
-.speed-control {
-    cursor: pointer;
-    color: darkgray;
-    font-size: 0.9rem;
-}

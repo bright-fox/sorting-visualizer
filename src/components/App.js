@@ -6,7 +6,7 @@ import optionsReducer from '../reducers/optionsReducer'
 
 const App = () => {
     // Initialize options 
-    const [state, dispatch] = useReducer(optionsReducer, { size: 10, speed: 0.5, sortAlgo: null, start: false })
+    const [state, dispatch] = useReducer(optionsReducer, { size: 10, speed: 1, sortAlgo: null, start: false })
     const optionsContextValue = useMemo(() => ({ state, dispatch }), [state, dispatch])
 
     return (

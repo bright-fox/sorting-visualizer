@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
-import "./Controls.css"
 import OptionsContext from '../contexts/OptionsContext';
 import { START, STOP } from '../actions';
+import SpeedControls from "./SpeedControls"
+
+import "./Controls.css"
 
 const Controls = ({ setStart }) => {
     const { state, dispatch } = useContext(OptionsContext)
@@ -21,7 +23,7 @@ const Controls = ({ setStart }) => {
             <button onClick={handleStart} className="play-button">
                 <FontAwesomeIcon icon={state.start ? faPause : faPlay} />
             </button>
-            <div className="speed-control">{state.speed}x</div>
+            <SpeedControls />
         </div>
     )
 }

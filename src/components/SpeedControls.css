@@ -1,0 +1,39 @@
+.speed-control-menu {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.speed-control-heading {
+    cursor: pointer;
+    margin: 0 5px;
+    color: #173F5F;
+}
+
+.speed-control-options {
+    position: absolute;
+    left: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+    justify-content: center;
+    font-size: 0.8rem;
+    padding-bottom: 1px;
+    color: #20639B;
+}
+
+.speed-control-option {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.speed-control {
+    cursor: pointer;
+    color: darkgray;
+    font-size: 0.9rem;
+}
+
+.hidden {
+    display: none;
+}

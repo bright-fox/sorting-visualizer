@@ -5,6 +5,9 @@ export const QUICK_SORT = "Quick Sort"
 export const SELECTION_SORT = "Selection Sort"
 export const INSERTION_SORT = "Insertion Sort"
 
+// default options
+export const DEFAULT_SLEEP_DELAY = 600
+
 // colors
 
 export const NORMAL_COLOR = "#3CAEA3"

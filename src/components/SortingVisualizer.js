@@ -3,7 +3,7 @@ import { SORT, STOP } from "../actions"
 import bubblesort from "../algorithms/bubblesort"
 import OptionsContext from "../contexts/OptionsContext"
 import { shuffleArray, sleep, changeBarColors, calculateHeight } from "../utils"
-import { COMPARE_COLOR, NORMAL_COLOR, SWAP_COLOR } from "../variables"
+import { COMPARE_COLOR, DEFAULT_SLEEP_DELAY, NORMAL_COLOR, SWAP_COLOR } from "../variables"
 import Controls from "./Controls"
 
 import "./SortingVisualizer.css"
@@ -48,7 +48,8 @@ const SortingVisualizer = () => {
 
             // color change for displaying comparison between two values
             changeBarColors(displayedBars, animation.comparison, COMPARE_COLOR)
-            await sleep(200)
+
+            await sleep(Math.floor(DEFAULT_SLEEP_DELAY / state.speed))
 
             if (!animation.swap) {
                 // change color back to the original color
@@ -56,7 +57,8 @@ const SortingVisualizer = () => {
             } else {
                 // color change to indicate swap of two values
                 changeBarColors(displayedBars, animation.swap, SWAP_COLOR)
-                await sleep(200)
+                
+                await sleep(Math.floor(DEFAULT_SLEEP_DELAY / state.speed))
 
                 // change color back to the original color
                 changeBarColors(displayedBars, animation.swap, NORMAL_COLOR)
