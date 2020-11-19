@@ -75,6 +75,15 @@ const SortingVisualizer = () => {
             setIndex(prevIndex => prevIndex + 1)
         }
         colorBars()
+
+        // clean up that changes the color back to the normal color
+        return () => {
+            if(!animations || animations.length < 0 || index > animations.length - 1) return
+            const animation = animations[index]
+            const animationName = Object.keys(animation)[0]
+
+            changeBarColors(document.querySelectorAll(".bar"), animation[animationName], NORMAL_COLOR)
+        }
     }, [state.start, index, animations, array, dispatch, state.speed])
 
     const renderBars = () => {
