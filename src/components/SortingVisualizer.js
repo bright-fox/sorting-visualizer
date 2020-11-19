@@ -29,6 +29,9 @@ const SortingVisualizer = () => {
 
     // create the animation steps for the sorting algorithm
     useEffect(() => {
+        // reset index (hacky solution)
+        setTimeout(() => setIndex(0), DEFAULT_SLEEP_DELAY)
+
         switch(state.sortAlgo) {
             case BUBBLE_SORT:
                 setAnimations(bubblesort([...array]))
@@ -48,7 +51,8 @@ const SortingVisualizer = () => {
             if (index >= animations.length - 1) {
                 dispatch({ type: STOP })
                 dispatch({ type: SORT, payload: null})
-                return setIndex(0)
+                setIndex(0)
+                return
             }
 
             const animation = animations[index]
@@ -75,15 +79,6 @@ const SortingVisualizer = () => {
             setIndex(prevIndex => prevIndex + 1)
         }
         colorBars()
-
-        // clean up that changes the color back to the normal color
-        return () => {
-            if(!animations || animations.length < 0 || index > animations.length - 1) return
-            const animation = animations[index]
-            const animationName = Object.keys(animation)[0]
-
-            changeBarColors(document.querySelectorAll(".bar"), animation[animationName], NORMAL_COLOR)
-        }
     }, [state.start, index, animations, array, dispatch, state.speed])
 
     const renderBars = () => {
