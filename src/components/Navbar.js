@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { SIZE, SORT } from '../actions'
 import OptionsContext from '../contexts/OptionsContext'
 import { BUBBLE_SORT, INSERTION_SORT, QUICK_SORT, SELECTION_SORT } from '../variables'
@@ -7,7 +7,6 @@ import "./Navbar.css"
 
 const Navbar = () => {
     const { state, dispatch } = useContext(OptionsContext)
-    const [speed, setSpeed] = useState(0.5)
 
     const handleAlgorithmDropdown = value => {
         dispatch({ type: SORT, payload: value })

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
 import { SORT, STOP } from "../actions"
 import bubblesort from "../algorithms/bubblesort"
+import selectionsort from "../algorithms/selectionsort"
 import OptionsContext from "../contexts/OptionsContext"
 import { shuffleArray, sleep, changeBarColors, calculateHeight, swap } from "../utils"
-import { COMPARE_COLOR, DEFAULT_SLEEP_DELAY, NORMAL_COLOR, SWAP_COLOR } from "../variables"
+import { BUBBLE_SORT, COMPARE_COLOR, DEFAULT_SLEEP_DELAY, NORMAL_COLOR, SELECTION_SORT, SWAP_COLOR } from "../variables"
 import Controls from "./Controls"
 
 import "./SortingVisualizer.css"
@@ -28,8 +29,16 @@ const SortingVisualizer = () => {
 
     // create the animation steps for the sorting algorithm
     useEffect(() => {
-        if (state.sortAlgo === null) return
-        setAnimations(bubblesort([...array]))
+        switch(state.sortAlgo) {
+            case BUBBLE_SORT:
+                setAnimations(bubblesort([...array]))
+                break
+            case SELECTION_SORT:
+                setAnimations(selectionsort([...array]))
+                break
+            default:
+                return
+        }
     }, [state.sortAlgo, array])
 
     // start the sorting animation
@@ -43,25 +52,21 @@ const SortingVisualizer = () => {
             }
 
             const animation = animations[index]
+            const animationName = Object.keys(animation)[0]
             const displayedBars = document.querySelectorAll(".bar")
 
-            // color change for displaying comparison between two values
-            changeBarColors(displayedBars, animation.comparison, COMPARE_COLOR)
+            if(animation.compare) {
+                changeBarColors(displayedBars, animation.compare, COMPARE_COLOR)
+            }
+
+            if(animation.swap) {
+                changeBarColors(displayedBars, animation.swap, SWAP_COLOR)
+            }
 
             await sleep(Math.floor(DEFAULT_SLEEP_DELAY / state.speed))
+            changeBarColors(displayedBars, animation[animationName], NORMAL_COLOR)
 
-            if (!animation.swap) {
-                // change color back to the original color
-                changeBarColors(displayedBars, animation.comparison, NORMAL_COLOR)
-            } else {
-                // color change to indicate swap of two values
-                changeBarColors(displayedBars, animation.swap, SWAP_COLOR)
-                
-                await sleep(Math.floor(DEFAULT_SLEEP_DELAY / state.speed))
-
-                // change color back to the original color
-                changeBarColors(displayedBars, animation.swap, NORMAL_COLOR)
-
+            if(animation.swap) {
                 // make the actual changes in the array
                 swap(array, animation.swap[0], animation.swap[1])
             }
@@ -70,7 +75,7 @@ const SortingVisualizer = () => {
             setIndex(prevIndex => prevIndex + 1)
         }
         colorBars()
-    }, [state.start, index, animations, array, dispatch])
+    }, [state.start, index, animations, array, dispatch, state.speed])
 
     const renderBars = () => {
         const width = (1 / array.length) * 100
